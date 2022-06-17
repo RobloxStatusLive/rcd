@@ -1,0 +1,16 @@
+[Unit]
+Description=Roblox Status Live Warehouse Server
+After=syslog.service network.target
+
+[Service]
+Type=simple
+User={u}
+Group={g}
+PIDFile=/run/rsl-wh.pid
+WorkingDirectory={wd}
+ExecStart={npm} run serve
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+
+[Install]
+WantedBy=multi-user.target

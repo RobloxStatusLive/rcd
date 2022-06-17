@@ -1,0 +1,16 @@
+[Unit]
+Description=Roblox Status Live Nebula Sync
+After=syslog.service network.target
+
+[Service]
+Type=simple
+User={u}
+Group={g}
+PIDFile=/run/rsl-neb-sync.pid
+WorkingDirectory={wd}
+ExecStart={py} launch.py --sync-thread
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+
+[Install]
+WantedBy=multi-user.target
